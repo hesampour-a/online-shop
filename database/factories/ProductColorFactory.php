@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Cart;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cart>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProductColor>
  */
-class CartFactory extends Factory
+class ProductColorFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +17,8 @@ class CartFactory extends Factory
     public function definition(): array
     {
         return [
-            'status' => fake()->randomElement(Cart::$status),
+            'name' => fake()->colorName(),
+            'value' => fake()->rgbCssColor()
         ];
     }
 }

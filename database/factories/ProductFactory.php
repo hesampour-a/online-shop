@@ -17,7 +17,11 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->randomElement(['دوربین عکاسی', 'موبایل سامسونگ', 'لپ تاپ دل', 'موس گرین', 'هدفون هیلو', 'میز تحریر']),
+            'description' => fake()->paragraph,
+            'count' => fake()->numberBetween(1, 200),
+            'price' => fake()->numberBetween(100000, 100000000)
+
         ];
     }
 }

@@ -17,7 +17,7 @@ class CartItemFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'count' => fake()->numberBetween(1, 2),
         ];
     }
 }
