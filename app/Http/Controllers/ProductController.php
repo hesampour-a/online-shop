@@ -13,7 +13,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $filters = request()->only('search', 'min_price', 'max_price', 'category', 'brand');
+
+        return view('product.index', ['products' => Product::with('product_image')->filter($filters)->latest()->get()]);
     }
 
     /**
@@ -37,7 +39,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('product.show', ['product' => $product->load('product_image', 'product_brand', 'category'), 'properties' => json_decode($product->description), 'colors' => json_decode($product->colors)]);
     }
 
     /**

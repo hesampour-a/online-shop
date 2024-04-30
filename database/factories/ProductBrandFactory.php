@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProductSize>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProductBrand>
  */
-class ProductSizeFactory extends Factory
+class ProductBrandFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,7 @@ class ProductSizeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name,
-            'value' => fake()->numberBetween(32, 48)
+            //
         ];
     }
 }

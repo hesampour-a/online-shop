@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductColor;
+use App\Models\ProductBrand;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProductColorController extends Controller
+class ProductBrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class ProductColorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductColor $productColor)
+    public function show(ProductBrand $productBrand)
     {
         //
     }
@@ -43,7 +43,7 @@ class ProductColorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductColor $productColor)
+    public function edit(ProductBrand $productBrand)
     {
         //
     }
@@ -51,7 +51,7 @@ class ProductColorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductColor $productColor)
+    public function update(Request $request, ProductBrand $productBrand)
     {
         //
     }
@@ -59,7 +59,7 @@ class ProductColorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductColor $productColor)
+    public function destroy(ProductBrand $productBrand)
     {
         //
     }
