@@ -21,6 +21,8 @@ class Product extends Model
         'garanty',
         'long_description',
         'fa_title',
+        'category_id',
+        'product_brand_id'
 
     ];
 
@@ -57,11 +59,11 @@ class Product extends Model
         })->when($filters['max_price'] ?? null, function ($query, $max_price) {
             $query->where('price', '<=', $max_price);
         })->when($filters['brand'] ?? null, function ($query, $brand) {
-            $query->whereBelongsTo('product_brand', function ($query) use ($brand) {
+            $query->whereHas('product_brand', function ($query) use ($brand) {
                 $query->where('name', 'like', '%' . $brand . '%');
             });
         })->when($filters['category'] ?? null, function ($query, $category) {
-            $query->whereBelongsTo('category', function ($query) use ($category) {
+            $query->whereHas('category', function ($query) use ($category) {
                 $query->where('name', 'like', '%' . $category . '%');
             });
         });

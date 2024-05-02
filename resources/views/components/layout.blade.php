@@ -9,6 +9,7 @@
     <link href="{{ asset('easyshop/style/owl.carousel.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('easyshop/style/owl.theme.default.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('easyshop/style/style.css') }}" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
@@ -26,14 +27,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="login">
+
                         <a href="#" class="mybtn"><i class="fa fa-user-plus"></i>ثبت نام</a>
                         <a href="#" class="mybtn"><i class="fa fa-user-o"></i>ورود</a>
                         <a href="#" class="mybtn"><i class="fa fa-cart-arrow-down"></i>سبد</a>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <form action="">
-                        <input type="text" placeholder="کالای مورد نظر را جستجو کنید">
+                    <form action="{{route('product.index')}}" method="get">
+                        <input type="text" name="search" placeholder="کالای مورد نظر را جستجو کنید">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
@@ -335,6 +337,48 @@
     <script src="{{ asset('easyshop/js/bootstrap.js') }}" type="text/javascript"></script>
     <script src="{{ asset('easyshop/js/owl.carousel.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('easyshop/js/js.js') }}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function addDescriptionInput() {
+            var r = $('<input />').attr({
+                type: "text",
+                name: "description[]",
+                class: "form-control mt-1"
+
+            });
+            $("#descriptionDiv").append(r);
+        }
+
+        function addColorInput() {
+            var r = $('<input />').attr({
+                type: "text",
+                name: "colors[]",
+                class: "form-control mt-1"
+
+            });
+            $("#colorDiv").append(r);
+        }
+
+        function addSizeInput() {
+            var r = $('<input />').attr({
+                type: "text",
+                name: "sizes[]",
+                class: "form-control mt-1"
+
+            });
+            $("#sizeDiv").append(r);
+        }
+
+        function addImageInput() {
+            var r = $('<input />').attr({
+                type: "file",
+                name: "images[]",
+                class: "form-control mt-1"
+
+            });
+            $("#imageDiv").append(r);
+        }
+    </script>
 </body>
 
 </html>
