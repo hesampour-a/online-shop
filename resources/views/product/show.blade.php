@@ -56,8 +56,11 @@
                             </div>
                             <hr>
                             <h3>{{ number_format($product->price) }} تومان</h3>
-                            <div class="btn-single">
-                                <a href="#"><i class="fa fa-cart-plus"></i>خرید آنلاین</a>
+                            <div>
+                                <form action="{{route('cart-item.store',['product'=>$product])}}" method="post">
+                                    @csrf
+                                    <button class="btn" type="submit"><i class="fa fa-cart-plus"></i>اضافه کردن به سبد خرید</button>
+                                </form>
                             </div>
                         </div>
                         <div class="col-md-5">

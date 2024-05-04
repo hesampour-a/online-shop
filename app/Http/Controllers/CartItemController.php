@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\CartItem;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CartItemController extends Controller
@@ -27,9 +29,43 @@ class CartItemController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Product $product)
     {
-        //
+        if (auth()->user()) {
+
+            $cart = User::find(auth()->user()->id)->carts()->where('status', 'فعال')->latest()->get()[0];
+
+            if ($cart->cart_item()->where('product_id', $product->id)->count() > 0) {
+                $exiting_product = $cart->cart_item()->where('product_id', $product->id)->get()[0];
+                $exiting_product->update(['count' => $exiting_product->count + 1]);
+
+                return redirect()->back()->with('success', 'تعداد محصول در سبد خرید بروزرسانی شد');
+            } else {
+                $cart->cart_item()->create([
+                    'product_id' => $product->id,
+                    'count' => 1
+                ]);
+                return redirect()->back()->with('success', 'محصول به سبد خرید اضافه شد');
+            }
+        } else {
+            $cart = session('cart', []);
+
+            if (isset($cart[$product->id])) {
+                // product is already in shopping cart, increment the amount
+                $cart[$product->id]['count'] += 1;
+            } else {
+                // fetch the product and add 1 to the shopping cart
+
+                $cart[$product->id] = [
+                    'id' => $product->id,
+                    'count'    => 1,
+                ];
+            }
+
+            // update the session data (this equals Session::put() )
+            session(['cart' => $cart]);
+            return redirect()->back()->with('success', 'محصول به سشن سبد خرید اضافه شد');
+        }
     }
 
     /**
@@ -53,7 +89,12 @@ class CartItemController extends Controller
      */
     public function update(Request $request, CartItem $cartItem)
     {
-        //
+        $cartItem->update([
+            'count' => $request->validate([
+                'count' => 'required|numeric'
+            ])
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -61,6 +102,7 @@ class CartItemController extends Controller
      */
     public function destroy(CartItem $cartItem)
     {
-        //
+        $cartItem->delete();
+        return redirect()->back();
     }
 }

@@ -70,7 +70,19 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('product.show', ['product' => $product->load('product_image', 'product_brand', 'category', 'category.product'), 'properties' => json_decode($product->description), 'colors' => json_decode($product->colors)]);
+        return view(
+            'product.show',
+            [
+                'product' => $product->load(
+                    'product_image',
+                    'product_brand',
+                    'category',
+                    'category.product'
+                ),
+                'properties' => json_decode($product->description),
+                'colors' => json_decode($product->colors)
+            ]
+        );
     }
 
     /**

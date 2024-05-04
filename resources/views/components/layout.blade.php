@@ -27,10 +27,16 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="login">
+                        @if (auth()->user())
+                        <a href="{{route('home')  }}" class="mybtn"><i class="fa fa-user"></i>{{auth()->user()->name}}</a>
+                        @else
 
-                        <a href="#" class="mybtn"><i class="fa fa-user-plus"></i>ثبت نام</a>
-                        <a href="#" class="mybtn"><i class="fa fa-user-o"></i>ورود</a>
-                        <a href="#" class="mybtn"><i class="fa fa-cart-arrow-down"></i>سبد</a>
+                        <a href="{{ route('register') }}" class="mybtn"><i class="fa fa-user-plus"></i>ثبت نام</a>
+                        <a href="{{ route('login') }}" class="mybtn"><i class="fa fa-user-o"></i>ورود</a>
+
+                        @endif
+
+                        <a href=" {{ route('shopping-cart.show') }}" class="mybtn"><i class="fa fa-cart-arrow-down"></i>سبد</a>
                     </div>
                 </div>
                 <div class="col-md-6">
