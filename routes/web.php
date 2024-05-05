@@ -22,3 +22,4 @@ Route::get('shopping-cart', [CartController::class, 'show'])->name('shopping-car
 //Route::resource('cart-item', CartItemController::class)->only('store');
 Route::resource('cart-item', CartItemController::class)->only('update', 'destroy');
 Route::post('cart-item/{product}', [CartItemController::class, 'store'])->name('cart-item.store');
+//Route::delete('cart-item/{id}', [CartItemController::class, 'destroy'])->name('cart-item.destroy');

@@ -59,7 +59,7 @@ class CartController extends Controller
                 ->join('cart_items', 'carts.id', '=', 'cart_items.cart_id')
                 ->join('products', 'cart_items.product_id', '=', 'products.id')
                 ->join('product_images', 'products.id', '=', 'product_images.product_id')
-                ->select('products.*', 'cart_items.count', 'product_images.img_path')
+                ->select('products.*', 'cart_items.count', 'product_images.img_path', 'cart_items.id as cart_item_id')
                 ->get();
 
 

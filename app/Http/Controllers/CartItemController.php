@@ -89,11 +89,13 @@ class CartItemController extends Controller
      */
     public function update(Request $request, CartItem $cartItem)
     {
-        $cartItem->update([
-            'count' => $request->validate([
-                'count' => 'required|numeric'
-            ])
-        ]);
+        $value = $cartItem->count;
+        if ($request->func === "plus") {
+            $cartItem->update(['count' => $value + 1]);
+        } elseif ($request->func === "min") {
+            $cartItem->update(['count' => $value - 1]);
+        }
+
         return redirect()->back();
     }
 
@@ -103,6 +105,7 @@ class CartItemController extends Controller
     public function destroy(CartItem $cartItem)
     {
         $cartItem->delete();
+
         return redirect()->back();
     }
 }
