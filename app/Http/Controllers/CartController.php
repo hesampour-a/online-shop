@@ -41,36 +41,23 @@ class CartController extends Controller
     public function show()
     {
 
-        if (auth()->user()) {
-
-            // $cart = User::find(auth()->user()->id)->carts()->where('status', 'فعال')->latest()->get()[0];
-            // $cart_items = $cart->cart_item()->get();
-
-            // $products = [];
-            // foreach ($cart_items as $cart_item) {
-            //     $products[] = Product::where('id', $cart_item->product_id)->get()[0];
-            // }
 
 
-            $products = DB::table('users')
-                ->join('carts', 'users.id', '=', 'carts.user_id')
-                ->where('carts.user_id', '=', auth()->user()->id)
-                ->where('carts.status', '=', 'فعال')
-                ->join('cart_items', 'carts.id', '=', 'cart_items.cart_id')
-                ->join('products', 'cart_items.product_id', '=', 'products.id')
-                ->join('product_images', 'products.id', '=', 'product_images.product_id')
-                ->select('products.*', 'cart_items.count', 'product_images.img_path', 'cart_items.id as cart_item_id')
-                ->get();
+        $cart = User::find(auth()->user()->id)->carts()->where('status', 'فعال')->latest()->get()[0];
 
+        $this->authorize('view', $cart);
 
-            return view(
-                'cart.show',
-                [
-                    'products' => $products
+        $cacheKey = 'cart' . $cart->id;
 
-                ]
-            );
-        }
+        $products = cache()->remember($cacheKey, 3600, fn () => Cart::cartProducts());
+
+        return view(
+            'cart.show',
+            [
+                'products' => $products
+
+            ]
+        );
     }
 
     /**

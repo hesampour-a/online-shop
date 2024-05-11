@@ -89,6 +89,7 @@ class CartItemController extends Controller
      */
     public function update(Request $request, CartItem $cartItem)
     {
+        $this->authorize('update', $cartItem);
         $value = $cartItem->count;
         if ($request->func === "plus") {
             $cartItem->update(['count' => $value + 1]);
@@ -104,6 +105,7 @@ class CartItemController extends Controller
      */
     public function destroy(CartItem $cartItem)
     {
+        $this->authorize('delete', $cartItem);
         $cartItem->delete();
 
         return redirect()->back();

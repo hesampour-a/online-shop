@@ -14,6 +14,12 @@ class CartItem extends Model
         'cart_id',
         'product_id'
     ];
+
+    public static function booted()
+    {
+        static::updated(fn (CartItem $cartItem) => cache()->forget('cart' . $cartItem->cart_id));
+        static::deleted(fn (CartItem $cartItem) => cache()->forget('cart' . $cartItem->cart_id));
+    }
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

@@ -26,6 +26,12 @@ class Product extends Model
 
     ];
 
+    public static function booted()
+    {
+        static::updated(fn (Product $product) => cache()->forget('product' . $product->id));
+        static::deleted(fn (Product $product) => cache()->forget('product' . $product->id));
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);

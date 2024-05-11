@@ -17,6 +17,9 @@ class ProductController extends Controller
     {
         $filters = request()->only('search', 'min_price', 'max_price', 'category', 'brand');
 
+
+
+
         return view('product.index', ['products' => Product::with(['product_image', 'category'])->filter($filters)->latest()->get()]);
     }
 
@@ -70,15 +73,20 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+
+        $cacheKey = 'product' . $product->id;
+
+        $product_cache = cache()->remember($cacheKey, 3600, fn () => $product->load(
+            'product_image',
+            'product_brand',
+            'category',
+            'category.product'
+        ));
+
         return view(
             'product.show',
             [
-                'product' => $product->load(
-                    'product_image',
-                    'product_brand',
-                    'category',
-                    'category.product'
-                ),
+                'product' => $product_cache,
                 'properties' => json_decode($product->description),
                 'colors' => json_decode($product->colors)
             ]

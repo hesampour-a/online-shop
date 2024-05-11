@@ -22,9 +22,6 @@
                                 </div>
                                 <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
 
-                                    <!-- <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                        <i class="">+</i>
-                                    </button> -->
 
                                     <form action="{{route('cart-item.update',$product->cart_item_id)}}" method="post">
                                         @csrf
@@ -42,9 +39,7 @@
 
 
 
-                                    <!-- <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                        <i class="">-</i>
-                                    </button> -->
+
                                 </div>
                                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                     <h5 class="mb-0"> {{number_format($product->price * $product->count) }} تومان</h5>
