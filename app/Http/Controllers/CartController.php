@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\User;
+use App\services\MoveCartToDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -41,7 +42,7 @@ class CartController extends Controller
     public function show()
     {
 
-
+        //MoveCartToDatabase::SessionToDatabase();
 
         $cart = User::find(auth()->user()->id)->carts()->where('status', 'فعال')->latest()->get()[0];
 

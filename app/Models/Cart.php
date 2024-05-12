@@ -15,6 +15,7 @@ class Cart extends Model
 
     protected $fillable = [
         'status',
+        'user_id'
     ];
     public static function booted()
     {
