@@ -2,10 +2,12 @@
 
 namespace App\Listeners;
 
+use App\Mail\welcomeEmail;
 use App\services\MoveCartToDatabase;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Mail;
 
 class AddSessionCartToDatabaseCart
 {
@@ -22,7 +24,9 @@ class AddSessionCartToDatabaseCart
      */
     public function handle(Login $event): void
     {
-        dd($event->user);
+
         MoveCartToDatabase::SessionToDatabase($event->user);
+
+        Mail::to($event->user,)->queue(new welcomeEmail($event->user));
     }
 }
