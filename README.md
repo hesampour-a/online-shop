@@ -10,7 +10,7 @@ this is a practice project with laravel. in this project i tried to implement an
 - Relations 
 - Api (CRUD and Auth)
 - Email (send a wellcome email queued)
-- Queu
+- Queue
 - Event and Listeners(login event)
 - Queries for joining tables
 - blade and components
